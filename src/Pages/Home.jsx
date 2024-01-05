@@ -2,13 +2,15 @@ import React from 'react'
 import HeroSection from '../Components/Home/HeroSection'
 import BelowHero from '../Components/Home/BelowHero'
 import MostPopular from '../Components/Home/MostPopular'
+import JobList from '../Components/Home/JobList'
 
 function Home() {
   return (
     <div className='mx-auto container'>
       <HeroSection/>
       <BelowHero/>
-      <MostPopular/>
+      {/* <MostPopular/> */}
+      <JobList/>
     </div>
   )
 }

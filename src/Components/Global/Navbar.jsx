@@ -13,7 +13,7 @@ function Navbar() {
         <div className='flex gap-4'>
             <p>+381 66 252 771</p>
             <div>
-                <p>Sign In</p>
+                <Link to='/user'>Sign In</Link>
             </div>
         </div>
     </div>
