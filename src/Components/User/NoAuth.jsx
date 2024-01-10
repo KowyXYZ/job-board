@@ -1,6 +1,30 @@
 import React from 'react'
+import { signInWithPopup } from 'firebase/auth'
+import { auth, provider } from '../../Firebase/firebase-config'
+import Cookies from 'universal-cookie'
+import { Link } from 'react-router-dom'
+import { useSelector } from 'react-redux'
 
-function NoAuth() {
+const cookies = new Cookies()
+
+function NoAuth({setIsAuth}) {
+
+  const signInWithGoogle = async () => {
+    const res = await signInWithPopup(auth, provider)
+    try {
+      cookies.set('auth-token', res?.user?.refreshToken)
+      setIsAuth(true)
+      window.location.reload()
+    } catch (error) {
+      console.log(error)
+    }
+
+  }
+
+  const {users} = useSelector(state => state.jobs)
+  
+  
+
   return (
     <div className='justify-center items-center flex py-32 flex-col gap-2'>
         <h1 className='text-[24px] font-semibold'>Welcome To Jobify</h1>
@@ -9,9 +33,9 @@ function NoAuth() {
             <input className='outline-none p-2 border-2 rounded-2xl ' type="password" placeholder='Enter Your Password'/>
             <button className='bg-[#0A65CC] text-[#fff] rounded-2xl p-1'>Submit</button>
         </form>
-        <p>If You Don't Have An Account You Can Make One <span className='underline'>Here</span></p>
+        <p>If You Don't Have An Account You Can Make One <Link to='/user/register' className='underline'>Here</Link></p>
         <p>or</p>
-        <button className='underline'>Sign In With Google</button>
+        <button onClick={() => signInWithGoogle()} className='underline'>Sign In With Google</button>
     </div>
   )
 }

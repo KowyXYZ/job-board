@@ -1,4 +1,5 @@
 import { createSlice, current } from "@reduxjs/toolkit";
+import { json } from "react-router-dom";
 
 const currentTime = new Date().toString()
 
@@ -66,7 +67,14 @@ const initialState = {
         },
        
     ],
-    favJobs: []
+    favJobs: [],
+    users: localStorage.getItem('users') ? JSON.parse(localStorage.getItem('users')) : [
+        {
+            username: 'Kowy',
+            email: 'kowybusiness@gmail.com',
+            pw: 'Kowy123'
+        }
+    ]
 }
 
 const sliceJobs = createSlice({
@@ -74,10 +82,16 @@ const sliceJobs = createSlice({
     initialState,
     reducers: {
         addJob(state, action) {
-            state.favJobs.push(action.payload)
+           console.log(action.payload)
+        },
+
+        AddAccount(state, action) {
+           state.users.push(action.payload)
+           localStorage.setItem('users', JSON.stringify(state.users))
         }
+
     }
 })
 
-export const {addJob} = sliceJobs.actions
+export const {addJob, AddAccount} = sliceJobs.actions
 export default sliceJobs.reducer
