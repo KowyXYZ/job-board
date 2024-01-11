@@ -7,6 +7,7 @@ import { useState } from 'react';
 import Cookies from 'universal-cookie';
 import Auth from './Components/User/Auth';
 import Register from './Components/User/Register';
+import JobSingleCard from './Components/Job/JobSingleCard';
 const cookies = new Cookies()
 
 
@@ -18,9 +19,10 @@ function App() {
   const router = createBrowserRouter(
     createRoutesFromElements(
       <Route path='/' element={<RootLayout/>}>
-        <Route index element={<Home/>}/>
+        <Route index element={<Home isAuth={isAuth}/>}/>
         <Route path='/user' element={isAuth ? <Auth setIsAuth={setIsAuth}/> : <NoAuth setIsAuth={setIsAuth}/>}/>
         <Route path='/user/register' element={<Register/>}/>
+        <Route path='/jobs/:job' element={<JobSingleCard/>}/>
       </Route>
     )
   )

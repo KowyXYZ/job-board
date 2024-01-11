@@ -1,13 +1,24 @@
 import React from 'react'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import pin from '../../Assets/MapPin.png'
 import mark from '../../Assets/bookmark.png'
+import { addJob } from '../../Store/sliceJob'
+import { Link } from 'react-router-dom'
 
-function JobList() {
+function JobList({isAuth}) {
 
   const {totalJobs} = useSelector(state => state.jobs)
 
- 
+  const dispatch = useDispatch()
+
+  const checkerStatus = async (job) => {
+    if(isAuth) {
+      dispatch(addJob(job))
+
+    } else {
+      console.log('No acc ')
+    }
+  }
 
   return (
     <div className='py-12'>
@@ -32,9 +43,9 @@ function JobList() {
 
 
                   <div className='flex items-center justify-between'>
-                    <p className='underline text-[#0A65CC]'>View More</p>
-                    <div>
-                      <img src={mark} alt="mark" />
+                    <Link to={`/jobs/${job.name}`} className='underline text-[#0A65CC]'>View More</Link>
+                    <div >
+                      <img onClick={() => checkerStatus(job)} className='hover:invert transition-all ease-in-out active:w-3' src={mark} alt="mark" />
                     </div>
                   
                   </div>

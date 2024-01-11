@@ -16,7 +16,7 @@ function Register() {
         if(!email || !pw || !RePw) {
             alert('Make Sure To Fill All Input Fields')
         }
-        if(username || email || pw === RePw) {
+        if(username || email || RePw === pw) {
             dispatch(AddAccount({username, email, pw}))
         }
        

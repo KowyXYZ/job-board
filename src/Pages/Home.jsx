@@ -4,13 +4,13 @@ import BelowHero from '../Components/Home/BelowHero'
 import MostPopular from '../Components/Home/MostPopular'
 import JobList from '../Components/Home/JobList'
 
-function Home() {
+function Home({isAuth}) {
   return (
     <div className='mx-auto container'>
       <HeroSection/>
       <BelowHero/>
       {/* <MostPopular/> */}
-      <JobList/>
+      <JobList isAuth={isAuth}/>
     </div>
   )
 }
